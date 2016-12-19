@@ -1,12 +1,9 @@
-const centerTranslate = (x,y) => {
-    return "translate(" + x/2 + "," + y/2 + ")"
+// (Int, Int) -> String
+const translate = (x,y) => {
+    return "translate(" + x + "," + y + ")"
 }
 
-const centerOfNode = (node) => {
-    n = d3.select(node).node().getBoundingClientRect
-    return {x: 0, y:0}
-}
-
+// [{label:String, count:Int}]
 const dataset =
     [ { label: 'Abulia'    , count: 10 }
     , { label: 'Betelgeuse', count: 20 }
@@ -14,23 +11,31 @@ const dataset =
     , { label: 'Dijkstra'  , count: 40 }
     ]
 
+const maxData = (accessor, data) => {
+    let max = 0
+    for (var i = 0; i < data.length; i++) {
+        if (accessor(data[i]) > max) max = accessor(data[i])
+    }
+    return max
+}
+
 const width  = d3.select("#d3-pie-chart").node()
     .parentNode
     .getBoundingClientRect()
     .width
-const height = Math.max(width/3, 300)
+const height = Math.max(width/3, 256)
 
 const radius = 0.9*Math.min(width, height)/2
 
 const color = "#a82c5d"
 const transparency = d3.scaleLinear()
-    .domain([0,40])
+    .domain([0,maxData((d)=>d.count, dataset)])
 
 var pieCharts = d3.select("#d3-pie-chart")
     .attr("width", width)
     .attr("height", height)
     .append('g')
-    .attr('transform', centerTranslate(width,height))
+    .attr('transform', translate(width/2,height/2))
 
 const arc = d3.arc()
     .innerRadius(0)
