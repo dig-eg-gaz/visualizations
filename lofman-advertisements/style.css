@@ -58,6 +58,10 @@
     }
 }
 
+* {
+    box-sizing: border-box;
+}
+
 :root {
     margin: auto;
     /* Default Font */
@@ -65,6 +69,11 @@
     /* Colors */
     background-color: #E4E4E4;
     color: #333333;
+}
+
+body {
+    padding: 0;
+    margin: 0;
 }
 
 .page-body {
@@ -82,21 +91,26 @@
 }
 
 .visualization {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding: 0;
+    margin: 0;
 }
 
 .visualization__caption {
     font-family: 'Open Sans',sans-serif;
     color: #929292;
+    margin-top: 0.5em;
 }
 
 .section {
 
 }
 
-.section:last-of-type {
+.section:first-of-type {
+    padding-top: 2rem;
+}
 
+.section:last-of-type {
+    padding-bottom: 2rem;
 }
 
 .section__title {
