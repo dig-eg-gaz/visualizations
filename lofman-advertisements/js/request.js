@@ -1,10 +1,9 @@
-const loadDoc = (url, handler) => {
-    let xhttp = new XMLHttpRequest();
+function loadDoc(url,handler) {
+    let xhttp = new XMLHttpRequest()
 
-    xhttp.onreadystatechange = () => {
-        if (this.readySate === 4 && this.status === 200) {
-            let result = handler(this)
-            return result
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            handler(this)
         }
     }
 
@@ -13,7 +12,7 @@ const loadDoc = (url, handler) => {
 }
 
 const getXML = (xhttp) => {
-    return xhttp.responseXML
+    return xhttp.responseText
 }
 
 const parseXML = (parser) => {
