@@ -93,6 +93,7 @@ body {
 .visualization {
     padding: 0;
     margin: 0;
+    position: relative;
 }
 
 .visualization__caption {
