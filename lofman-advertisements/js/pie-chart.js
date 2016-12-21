@@ -1,7 +1,7 @@
 // (Int, Int) -> String
-const translate = (x,y) => {
+const translate = R.curry((x,y) => {
     return "translate(" + x + "," + y + ")"
-}
+})
 
 // [{label:String, count:Int}]
 const dataset =
@@ -11,13 +11,7 @@ const dataset =
     , { label: 'Dijkstra'  , count: 40 }
     ]
 
-const maxData = (accessor, data) => {
-    let max = 0
-    for (var i = 0; i < data.length; i++) {
-        if (accessor(data[i]) > max) max = accessor(data[i])
-    }
-    return max
-}
+const sortData = R.sortBy(R.prop('count'))
 
 const width  = d3.select("#d3-pie-chart").node()
     .parentNode
@@ -29,7 +23,8 @@ const radius = 0.9*Math.min(width, height)/2
 
 const color = "#a82c5d"
 const transparency = d3.scaleLinear()
-    .domain([0,maxData((d)=>d.count, dataset)])
+    .domain([0,dataset.length])
+    .range([0.2,1])
 
 var pieCharts = d3.select("#d3-pie-chart")
     .attr("width", width)
@@ -46,9 +41,9 @@ const pie = d3.pie()
     .sort(null)
 
 var path = pieCharts.selectAll("path")
-    .data(pie(dataset))
+    .data(pie(sortData(dataset)))
     .enter()
     .append('path')
     .attr('d', arc)
     .attr('fill', color)
-    .attr('opacity', (d) => transparency(d.value))
+    .attr('opacity', (d,i) => transparency(i))
