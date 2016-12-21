@@ -5,10 +5,13 @@ const translate = R.curry((x,y) => {
 
 // [{label:String, count:Int}]
 const dataset =
-    [ { label: 'Abulia'    , count: 10 }
-    , { label: 'Betelgeuse', count: 20 }
-    , { label: 'Cantaloupe', count: 30 }
-    , { label: 'Dijkstra'  , count: 40 }
+    [ { label: 'Agents'     , count: 46}
+    , { label: 'Beverage'   , count: 7}
+    , { label: 'Casino'     , count: 2}
+    , { label: 'Hotel'      , count: 18}
+    , { label: 'Manufacture', count: 16}
+    , { label: 'Steamers'   , count: 24}
+    , { label: 'Store'      , count: 10}
     ]
 
 const sortData = R.sortBy(R.prop('count'))
