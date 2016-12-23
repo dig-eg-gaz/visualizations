@@ -101,6 +101,14 @@ body {
     margin-top: 0.5em;
 }
 
+.pieChart-slice__label {
+    font-family: 'Roboto',sans-serif;
+    opacity: 0;
+    fill: white;
+}
+
+
+
 .section {
 
 }

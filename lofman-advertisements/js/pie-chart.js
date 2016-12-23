@@ -66,15 +66,18 @@ let slices = chart.selectAll('g.slice')
     .data(pie(sortData(dataset)))
     .enter()
     .append('g')
+    .attr('class','pieChart-slice')
 
 // Append the slices of the pie chart
 slices.append('path')
     .attr('d', arc)
     .attr('fill', color)
+    .attr('class','pieChart-slice__path')
     .attr('opacity', (d,i) => transparency(i))
 
 // Append the labels for the pie chart
 slices.append('svg:text')
     .attr('transform', translateToCentroid(1.5))
     .attr('text-anchor', 'middle')
+    .attr('class','pieChart-slice__label')
     .text((d, i) => sortData(dataset)[i].label)
