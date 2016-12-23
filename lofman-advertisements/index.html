@@ -5,13 +5,20 @@
 </head>
 <body>
     <header class="page-header">
-        <figure class="visualization">
-            <svg id="d3-word-cloud" class="visualization__word-cloud"></svg>
-            <figcaption class="visualization__caption">This word cloud identifies the most commonly used words in the advertisements of the Egpytian Gazette in 1905, excluding the most common words in English.</figcaption>
-        </figure>
         <h1 class="page-header__title">Advertisements in the Egyptian Gazette</h1>
+        <p class="page-header__opener">The Egyptian Gazette is an English daily newspaper from Alexandria, Egpyt.  These visualizations focus on the advertisements that appear in the Egyptian Gazette in the year 1905.</p>
     </header>
     <article class="page-body">
+        <section class="section">
+            <figure class="visualization">
+                <svg id="d3-word-cloud" class="visualization__word-cloud"></svg>
+                <figcaption class="visualization__caption">This word cloud identifies the most commonly used words in the advertisements of the Egpytian Gazette in 1905, excluding the most common words in English.</figcaption>
+            </figure>
+            <h2 class="section__title">Frequency</h2>
+            <div class="section__body">
+                <p></p>
+            </div>
+        </section>
         <section class="section">
             <figure class="visualization">
                 <svg id="d3-pie-chart" class="visualization__pie-chart"></svg>
@@ -25,11 +32,10 @@
         <section class="section">
             <figure class="visualization">
                 <div id="d3-chord-chart" class="visualization__chord-chart"></div>
-                <figcaption class="visualization__caption">This cord chart displays locations mentioned together in the same advertisements.</figcaption>
             </figure>
             <h2 class="section__title">Locations</h2>
             <div class="section__body">
-                <p>The assosiations between places in the advertisements has potential to reveal some interesting associations.</p>
+                <p></p>
             </div>
         </section>
     </article>
