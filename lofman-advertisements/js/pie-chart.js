@@ -4,6 +4,10 @@ const translate = R.curry((x,y) => {
     return "translate(" + x + "," + y + ")"
 })
 
+const translateToCentroid = R.curry((proportion,d) => {
+    let p = arc.centroid(d)
+    return translate(p[0]*proportion,p[1]*proportion)
+})
 
 // [{label:String, count:Int}]
 const dataset =
@@ -32,7 +36,7 @@ const radius = 0.9*Math.min(width, height)/2 // Width of the pie chart
 
 
 // Bind pie chart SVG element and sets the
-var pieCharts = d3.select("#d3-pie-chart")
+var chart = d3.select("#d3-pie-chart")
     .attr("width", width)
     .attr("height", height)
     .append('g')
@@ -57,10 +61,20 @@ const transparency = d3.scaleLinear()
 
 
 // Create the pie chart
-var path = pieCharts.selectAll("path")
+// First create groups that can hold the path and text
+let slices = chart.selectAll('g.slice')
     .data(pie(sortData(dataset)))
     .enter()
-    .append('path')
+    .append('g')
+
+// Append the slices of the pie chart
+slices.append('path')
     .attr('d', arc)
     .attr('fill', color)
     .attr('opacity', (d,i) => transparency(i))
+
+// Append the labels for the pie chart
+slices.append('svg:text')
+    .attr('transform', translateToCentroid(1.5))
+    .attr('text-anchor', 'middle')
+    .text((d, i) => sortData(dataset)[i].label)
