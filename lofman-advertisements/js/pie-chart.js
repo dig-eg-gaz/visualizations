@@ -11,14 +11,16 @@ const translateToCentroid = R.curry((proportion,d) => {
 
 // [{label:String, count:Int}]
 const dataset =
-    [ { label: 'Agents'     , count: 46}
-    , { label: 'Beverage'   , count: 7}
-    , { label: 'Casino'     , count: 2}
-    , { label: 'Hotel'      , count: 18}
-    , { label: 'Manufacture', count: 16}
-    , { label: 'Steamers'   , count: 24}
-    , { label: 'Store'      , count: 10}
+    [ { category: 'Agents'     , count: 46, topicWords: ['agent']}
+    , { category: 'Beverage'   , count: 7 , topicWords: ['beverage','whiskey','alcohol','wine']}
+    , { category: 'Casino'     , count: 2 , topicWords: ['casino']}
+    , { category: 'Hotel'      , count: 18, topicWords: ['hotel']}
+    , { category: 'Manufacture', count: 16, topicWords: ['manufacture','machine','factory']}
+    , { category: 'Steamers'   , count: 24, topicWords: ['steamer','line','ship']}
+    , { category: 'Store'      , count: 10, topicWords: ['store','magasin']}
     ]
+
+const dataSum = R.sum(R.map(R.prop('count'), dataset))
 
 
 // Sort data based upon the count property in ascending order.
