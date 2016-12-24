@@ -4,9 +4,9 @@ const translate = R.curry((x,y) => {
     return "translate(" + x + "," + y + ")"
 })
 
-const translateToCentroid = R.curry((proportion,d) => {
+const translateToCentroid = R.curry((offset,d) => {
     let p = arc.centroid(d)
-    return translate(p[0]*proportion,p[1]*proportion)
+    return translate(p[0]-offset[0],p[1]-offset[1])
 })
 
 // [{label:String, count:Int}]
@@ -64,22 +64,50 @@ const transparency = d3.scaleLinear()
 
 // Create the pie chart
 // First create groups that can hold the path and text
-let slices = chart.selectAll('g.slice')
+let slices = chart.selectAll('path.pie-slice')
     .data(pie(sortData(dataset)))
     .enter()
-    .append('g')
-    .attr('class','pieChart-slice')
-
-// Append the slices of the pie chart
-slices.append('path')
-    .attr('d', arc)
+    .append('path')
+    .attr('class','pie-slice')
     .attr('fill', color)
-    .attr('class','pieChart-slice__path')
+    .attr('d', arc)
     .attr('opacity', (d,i) => transparency(i))
 
-// Append the labels for the pie chart
-slices.append('svg:text')
-    .attr('transform', translateToCentroid(1.5))
-    .attr('text-anchor', 'middle')
-    .attr('class','pieChart-slice__label')
-    .text((d, i) => sortData(dataset)[i].label)
+
+// Create the legend
+let legend = d3.select('#d3-pie-chart')
+    .append('g')
+    .attr('class', 'legend')
+    .attr('transform', translate(width/2+radius*1.3,height/2))
+
+legend.append('text')
+    .attr('class', 'legend__title')
+    .attr('transform', translate(0,-height/8))
+
+legend.append('text')
+    .attr('class', 'legend__count')
+
+legend.append('text')
+    .attr('class', 'legend__topic-words')
+    .attr('transform', translate(0,height/8))
+
+legend.append('text')
+    .attr('class', 'legend__percent')
+
+const makeLegend = (d) => {
+    legend.attr('class', 'legend legend--visible')
+    legend.select('.legend__title').text(d.data.category)
+    legend.select('.legend__count').text('Count: ' + d.data.count)
+    legend.select('.legend__topic-words').text(d.data.topicWords)
+    legend.select('.legend__percent').text(Math.floor(100 * d.value / dataSum) + '%')
+        .attr('transform', translateToCentroid([radius*1.3,0],d))
+        .attr('text-anchor','middle')
+}
+
+const hideLegend = (d) => {
+    legend.attr('class', 'legend')
+}
+
+slices
+    .on('mouseover', makeLegend)
+    .on('mouseout' , hideLegend)
