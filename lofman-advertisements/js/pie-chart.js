@@ -9,6 +9,9 @@ const translateToCentroid = R.curry((offset,d) => {
     return translate(p[0]-offset[0],p[1]-offset[1])
 })
 
+const join = (x,y) => x + ' ' + y
+const prettyPrintArray = (xs) => R.reduce(join,'[',xs) + ' ]'
+
 // [{label:String, count:Int}]
 const dataset =
     [ { category: 'Agents'     , count: 46, topicWords: ['agent']}
@@ -98,7 +101,7 @@ const makeLegend = (d) => {
     legend.attr('class', 'legend legend--visible')
     legend.select('.legend__title').text(d.data.category)
     legend.select('.legend__count').text('Count: ' + d.data.count)
-    legend.select('.legend__topic-words').text(d.data.topicWords)
+    legend.select('.legend__topic-words').text(prettyPrintArray(d.data.topicWords))
     legend.select('.legend__percent').text(Math.floor(100 * d.value / dataSum) + '%')
         .attr('transform', translateToCentroid([radius*1.3,0],d))
         .attr('text-anchor','middle')
