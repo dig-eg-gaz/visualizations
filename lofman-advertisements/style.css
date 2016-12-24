@@ -104,6 +104,10 @@
     padding: 0 5vw;
 }
 
+.pie-slice {
+    fill: #a82c5d;
+}
+
 .pie-slice:hover {
     stroke: #E4E4E4;
     stroke-width: 2px;

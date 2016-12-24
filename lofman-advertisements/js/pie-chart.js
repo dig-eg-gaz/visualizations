@@ -59,7 +59,6 @@ const pie = d3.pie()
 
 
 // Used to calculate the color of each slice of the pie chart
-const color = '#a82c5d'
 const transparency = d3.scaleLinear()
     .domain([0,dataset.length])
     .range([0.2,1])
@@ -72,7 +71,6 @@ let slices = chart.selectAll('path.pie-slice')
     .enter()
     .append('path')
     .attr('class','pie-slice')
-    .attr('fill', color)
     .attr('d', arc)
     .attr('opacity', (d,i) => transparency(i))
 
