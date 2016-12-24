@@ -80,7 +80,7 @@ let slices = chart.selectAll('path.pie-slice')
 // Create the legend
 let legend = d3.select('#d3-pie-chart')
     .append('g')
-    .attr('class', 'legend')
+    .attr('class', 'legend legend--hidden')
     .attr('transform', translate(width/2+radius*1.3,height/2))
 
 legend.append('text')
@@ -108,7 +108,7 @@ const makeLegend = (d) => {
 }
 
 const hideLegend = (d) => {
-    legend.attr('class', 'legend')
+    legend.attr('class', 'legend legend--hidden')
 }
 
 slices

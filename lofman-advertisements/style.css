@@ -104,17 +104,24 @@
     padding: 0 5vw;
 }
 
+.pie-slice:hover {
+    stroke: #E4E4E4;
+    stroke-width: 2px;
+}
+
 .legend {
     font-family: 'Roboto',sans-serif;
     transition: opacity 0.5s;
-    opacity: 0;
     fill: #929292;
     font-size: 1rem;
 }
 
-.pie-slice:hover {
-    stroke: #E4E4E4;
-    stroke-width: 2px;
+.legend--visible {
+    opacity: 1;
+}
+
+.legend--hidden {
+    opacity: 0;
 }
 
 .legend__title {
@@ -128,10 +135,6 @@
 
 .legend__percent {
     fill: white;
-}
-
-.legend--visible {
-    opacity: 1;
 }
 
 .section {
