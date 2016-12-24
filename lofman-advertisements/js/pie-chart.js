@@ -1,7 +1,7 @@
 // Create a string describing the translate property
 // translate :: Num a => a -> a -> String
 const translate = R.curry((x,y) => {
-    return "translate(" + x + "," + y + ")"
+    return 'translate(' + x + ',' + y + ')'
 })
 
 const translateToCentroid = R.curry((offset,d) => {
@@ -32,7 +32,7 @@ const sortData = R.sortBy(R.prop('count'))
 
 
 // Calculate properties for the Pie Chart
-const width  = d3.select("#d3-pie-chart").node()
+const width  = d3.select('#d3-pie-chart').node()
     .parentNode
     .getBoundingClientRect()
     .width
@@ -41,9 +41,9 @@ const radius = 0.8*Math.min(width, height)/2 // Width of the pie chart
 
 
 // Bind pie chart SVG element and sets the
-var chart = d3.select("#d3-pie-chart")
-    .attr("width", width)
-    .attr("height", height)
+var chart = d3.select('#d3-pie-chart')
+    .attr('width', width)
+    .attr('height', height)
     .append('g')
     .attr('transform', translate(width/2,height/2))
 
@@ -59,7 +59,7 @@ const pie = d3.pie()
 
 
 // Used to calculate the color of each slice of the pie chart
-const color = "#a82c5d"
+const color = '#a82c5d'
 const transparency = d3.scaleLinear()
     .domain([0,dataset.length])
     .range([0.2,1])
