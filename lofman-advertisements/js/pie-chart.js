@@ -34,7 +34,7 @@ const width  = d3.select("#d3-pie-chart").node()
     .getBoundingClientRect()
     .width
 const height = Math.max(width/3, 256)        // Height of the pie chart
-const radius = 0.9*Math.min(width, height)/2 // Width of the pie chart
+const radius = 0.8*Math.min(width, height)/2 // Width of the pie chart
 
 
 // Bind pie chart SVG element and sets the
